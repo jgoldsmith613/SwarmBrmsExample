@@ -25,7 +25,7 @@ import cucumber.api.java.en.When;
 
 public class RulesSteps {
 
-	public static final String ROOT_URL = "http://localhost:8080/rest/rules/container/";
+	public static final String ROOT_URL = "http://localhost:8081/rest/rules/container/";
 
 	private Transaction transaction;
 	private Transaction response;
