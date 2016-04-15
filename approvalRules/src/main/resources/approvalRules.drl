@@ -1,0 +1,30 @@
+import com.rhc.model.Transaction;
+
+
+rule "accept all transactions by default"
+dialect "mvel"
+	when
+		$transaction : Transaction
+		(
+			approved == null
+		)
+	then
+		modify($transaction){
+			approved = new Boolean(true)
+		}
+end
+
+rule "Deny Transactions from account 7890"
+dialect "mvel"
+	when
+		$transaction : Transaction
+		(
+			account == 7891,
+			approved != false
+		)
+	then
+		modify($transaction){
+			approved = new Boolean(false)
+		}
+end
+

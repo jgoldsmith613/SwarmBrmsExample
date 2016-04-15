@@ -1,0 +1,61 @@
+import com.rhc.model.Transaction;
+
+rule "Route to US Rep Under 100"
+dialect "mvel"
+	when
+		$transaction : Transaction
+		(
+			country == "US",
+			amount < 100,
+			routeTo == null
+		)
+	then
+		modify($transaction){
+			routeTo = "US NY Rep"
+		}
+end
+
+rule "Route to US Manager greater than or equal 100"
+dialect "mvel"
+	when
+		$transaction : Transaction
+		(
+			country == "US",
+			amount >= 100,
+			routeTo == null
+		)
+	then
+		modify($transaction){
+			routeTo = "US NY Manager"
+		}
+end
+
+rule "Route to German Rep Under 50"
+dialect "mvel"
+	when
+		$transaction : Transaction
+		(
+			country == "DE",
+			amount < 50,
+			routeTo == null
+		)
+	then
+		modify($transaction){
+			routeTo = "DE MU Rep"
+		}
+end
+
+rule "Route to German Manager greater than or equal 50"
+dialect "mvel"
+	when
+		$transaction : Transaction
+		(
+			country == "DE",
+			amount >= 50,
+			routeTo == null
+		)
+	then
+		modify($transaction){
+			routeTo = "DE MU Manager"
+		}
+end
